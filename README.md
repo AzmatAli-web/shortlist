@@ -1,73 +1,28 @@
-<<<<<<< HEAD
-# Shortlist — AI tools worth keeping
+# Shortlist React
 
-A hand-edited directory of 40 AI tools, built as a dependency-free static site. Categorised browsing, a three-question recommender with transparent scoring, and a saved shortlist that lives in the browser.
+A React and CSS directory of 40 AI tools. Built with Vite and deployed to GitHub Pages. The app includes searchable, filterable browsing, tool detail pages, saved favorites, a scored three-question recommender, and light/dark themes.
 
-## Pages
+## Run locally
 
-| File | What it does |
-| --- | --- |
-| `index.html` | Home: hero search, the editor's pick, six picks, the eight-job index, recent additions, method, and the recommender call to action |
-| `browse.html` | The directory: 40 entries with category, price, platform, sort, picks and text search. Filters are reflected in the URL |
-| `tools/<id>.html` | One pre-rendered page per tool: why it is here, what it is good at, what to watch, at-a-glance facts, alternatives |
-| `recommend.html` | Three questions (job, budget, platform) scored against all 40 tools, with reasons, alternates and save-all |
-| `favorites.html` | The saved shortlist, grouped by job, with affinity recommendations, copy-as-text and clear-all |
-| `404.html` | Not-found page with routes back into the directory |
+Install Node.js 24 or newer, then run these commands in PowerShell:
 
-## Run it
-
-Open `index.html` directly, or serve the folder:
-
-```bash
-python -m http.server 8000 --directory shortlist
+```powershell
+npm.cmd install
+npm.cmd run dev
 ```
 
-Then visit `http://localhost:8000`. A local server is recommended: the Clipboard API used by **Copy list** is only available in a secure context. When it is blocked, the site falls back to a dialog with the list pre-selected.
+Open the local URL printed by Vite. For a production build, run `npm.cmd run build`; the deployable site is written to `dist/`. On macOS or Linux, use `npm` in place of `npm.cmd`.
 
-There is no build step at runtime, no external font, script or image request, and no tracking. The only network requests are the ones a visitor makes by clicking **Visit site**.
+## Deploy to GitHub Pages
 
-## Features
+The workflow in `.github/workflows/pages.yml` builds and deploys the app whenever changes are pushed to `main`. In the repository, open **Settings → Pages** and set **Build and deployment → Source** to **GitHub Actions**. Hash-based routes work under the repository's project URL.
 
-- **Categorised browsing** — eight jobs (`write`, `design`, `code`, `video`, `audio`, `work`, `auto`, `data`), five tools each. Category, price, platform and editorial-pick filters, A–Z / newest sorting, and search across names, taglines, tags, categories and strengths.
-- **Recommendations** — a deterministic three-question scorer. Budget and native platform add weight; editor's picks get a small nudge; reasons shown as chips. An "also worth a look" pair sits below the top three. If an open-source request has no open-source match in that job, the result note says so rather than pretending.
-- **Favourites** — stored in `localStorage` under `shortlist.saved.v1`. The header count, every star and the favourites page stay in sync, including across tabs. The page groups saved tools by job, suggests unsaved tools from the same and adjacent jobs, copies a plain-text list, and clears with a two-step confirmation.
-- **Theme** — light and dark, following the system on first visit and remembered under `shortlist.theme`. The chosen theme is applied before the first paint.
-- **Keyboard and motion** — skip link, visible focus rings, `aria-pressed` state on every toggle, live result counts, `/` focuses search, native `<dialog>` for the copy fallback, and reduced-motion support.
+## Project structure
 
-## Structure
+- `src/App.jsx` contains the React views, navigation, filters, recommendations, and saved state.
+- `src/main.jsx` mounts the app and imports the shared styles and tool data.
+- `assets/data.js` is the source for all 40 tool and category records.
+- `assets/styles.css` contains the responsive design system and component styles.
+- `vite.config.js` configures Vite with relative asset paths for GitHub Pages.
 
-```
-shortlist/
-├── index.html
-├── browse.html
-├── favorites.html
-├── recommend.html
-├── 404.html
-├── assets/
-│   ├── styles.css      design tokens, components, responsive rules, dark theme
-│   ├── app.js          favourites, filters, recommendations, theme
-│   ├── data.js         the 40-tool dataset (window.SL)
-│   └── favicon.svg
-└── tools/              one static page per tool (40 files)
-```
-
-## Editing content
-
-`assets/data.js` is the single data source for the directory, the recommender and the favourites recommendations. Each entry carries: `id`, `n` (name), `ab` (two-letter plate), `c` (category), `t` (tagline), `p` (price model), `pl` (platforms), `tags`, `url`, `note`, `good`, `watch`, and optionally `pick`, `pickNote`, `added`, `newRank`.
-
-The tool pages in `tools/` are pre-rendered from the same dataset so they read without JavaScript and carry their own title and description. If you add a tool, add its entry to `assets/data.js` and create the matching `tools/<id>.html` page using an existing entry as the pattern.
-
-## Verified
-
-- **45 pages** crawled in headless Chrome at 1280 px: zero console errors, zero uncaught exceptions, zero failed requests.
-- **No horizontal overflow** at 1440 px or 390 px on home, directory, tool, favourites, recommendations and 404, and across a 108-combination breakpoint sweep from 320 px to 1280 px (all six page types).
-- **Interaction tests** passed: save → count → reload persistence; unsave; category, price and picks filters; A–Z and newest sort; text search; empty state and reset; saved-tools list, removal focus, clear-all confirmation; quiz flow, save-all, start-over; copy fallback dialog and Escape to close; dark-theme persistence; `/` search shortcut.
-- **Opened from disk** (`file://`) as well as over HTTP: filters, theme, saving, favourites and the quiz all work, and the copy fallback appears when the Clipboard API is blocked.
-- **HTML checks**: one `h1` per page, no duplicate IDs, every internal link and asset resolves, every page has a title, description, viewport and skip link.
-- **Contrast**: body and secondary text meet WCAG AA on paper, surface and the footer band in both themes (faint metadata included).
-
-Verified with Google Chrome 155 on Windows. The layout uses system fonts, CSS grid and `color-mix()` with a solid-colour fallback.
-=======
-# shortlist
-about ai tool
->>>>>>> b0b918b1038fcff8156e3dc50fad87858a053587
+The older standalone HTML pages remain in the repository as references; the GitHub Pages workflow publishes the React app from `dist/`.
