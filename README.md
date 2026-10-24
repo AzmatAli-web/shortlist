@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Shortlist — AI tools worth keeping
 
 A hand-edited directory of 40 AI tools, built as a dependency-free static site. Categorised browsing, a three-question recommender with transparent scoring, and a saved shortlist that lives in the browser.
@@ -66,3 +67,7 @@ The tool pages in `tools/` are pre-rendered from the same dataset so they read w
 - **Contrast**: body and secondary text meet WCAG AA on paper, surface and the footer band in both themes (faint metadata included).
 
 Verified with Google Chrome 155 on Windows. The layout uses system fonts, CSS grid and `color-mix()` with a solid-colour fallback.
+=======
+# shortlist
+about ai tool
+>>>>>>> b0b918b1038fcff8156e3dc50fad87858a053587
