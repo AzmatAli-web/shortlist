@@ -25,4 +25,4 @@ The workflow in `.github/workflows/pages.yml` builds and deploys the app wheneve
 - `assets/styles.css` contains the responsive design system and component styles.
 - `vite.config.js` configures Vite with relative asset paths for GitHub Pages.
 
-The older standalone HTML pages remain in the repository as references; the GitHub Pages workflow publishes the React app from `dist/`.
+All site views are rendered by React. The root `index.html` is only the Vite mount document; GitHub Pages publishes the compiled React app from `dist/`.
